@@ -19,30 +19,26 @@ private const val BASE_URL = "http://api.openweathermap.org/"
 
 val appModule = module {
 
-    single<GeoRepository>{
-        GeoRepositoryImpl(
-            remoteDataSource = get()
-        )
-    }
+    single<GeoRepository> { GeoRepositoryImpl(remoteDataSource = get()) }
+    single<ForecastRepository> { ForecastRepositoryImpl(remoteDataSource = get()) }
 
-    single<ForecastRepository>{ForecastRepositoryImpl()}
-
-    single<GetGeoUsecase> {GetGeoUsecaseImpl(repository = get())}
-    single<GetForecastUsecase>{GetForecastUsecaseImpl(repository = get())}
-
-
+    single<GetGeoUsecase> { GetGeoUsecaseImpl(repository = get()) }
+    single<GetForecastUsecase> { GetForecastUsecaseImpl(repository = get()) }
 
 }
 
 val viewModelModule = module {
-    viewModel {MainActivityViewModel(
-        getGeoUsecase = get(),
-        getForecastUsecase = get(),
-        connectionChecker = get())}
+    viewModel {
+        MainActivityViewModel(
+            getGeoUsecase = get(),
+            getForecastUsecase = get(),
+            connectionChecker = get()
+        )
+    }
 }
 
-val retrofitModule = module{
-    single{
+val retrofitModule = module {
+    single {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))

@@ -1,38 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
+    android:background="@drawable/gradient_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.medmikk.avitoweatherapp.presentation.mainactivity.MainActivity">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/ET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/app_name"
-        android:text="moscow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        tools:context="com.medmikk.avitoweatherapp.presentation.mainactivity.MainActivity">
 
-    <TextView
-        android:id="@+id/TV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SDFLKJ"
-        app:layout_constraintStart_toStartOf="@+id/ET"
-        app:layout_constraintTop_toBottomOf="@+id/ET" />
+        <EditText
+            android:background="@null"
+            android:textAlignment="center"
+            android:layout_marginStart="50dp"
+            android:textSize="20sp"
+            android:id="@+id/searchET"
+            android:textColor="@color/white"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        app:layout_constraintStart_toEndOf="@+id/TV"
-        app:layout_constraintTop_toBottomOf="@+id/TV" />
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:tint="@color/white"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_baseline_search_24" />
+
+        <TextView
+            android:id="@+id/currTemperatureTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="90sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchET" />
+
+        <TextView
+            android:id="@+id/currDetailsTV"
+            style="@style/text_grey_dark_medium_18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currTemperatureTV" />
+
+        <TextView
+            android:id="@+id/updatedTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_light"
+            android:fontFamily="@font/sf_light"
+            app:layout_constraintBottom_toTopOf="@+id/weeklyRV"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#C3C4C9"
+            app:layout_constraintBottom_toTopOf="@+id/weeklyRV" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weeklyRV"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="18dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currDetailsTV" />
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

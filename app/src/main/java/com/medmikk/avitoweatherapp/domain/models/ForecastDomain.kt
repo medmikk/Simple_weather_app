@@ -1,5 +1,5 @@
 package com.medmikk.avitoweatherapp.domain.models
 
-data class ForecastDomain (
+data class ForecastDomain(
     val forecast: List<WeatherDomain>
-        )
+)

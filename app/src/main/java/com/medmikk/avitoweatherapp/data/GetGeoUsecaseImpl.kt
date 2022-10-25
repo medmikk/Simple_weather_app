@@ -5,10 +5,9 @@ import com.medmikk.avitoweatherapp.domain.usecase.GetGeoUsecase
 
 class GetGeoUsecaseImpl(private val repository: GeoRepository) : GetGeoUsecase {
     override suspend fun getGeoData(isCashDataRequired: Boolean, cityName: String?): GeoDomain {
-        return if (isCashDataRequired){
+        return if (isCashDataRequired) {
             repository.getCashedGeo()
-        } else{
-
+        } else {
             return repository.getRemoteGeo(cityName!!)
         }.also {
             repository.saveToCash(it)

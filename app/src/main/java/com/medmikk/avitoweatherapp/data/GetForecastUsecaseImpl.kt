@@ -3,14 +3,18 @@ package com.medmikk.avitoweatherapp.data
 import com.medmikk.avitoweatherapp.domain.models.ForecastDomain
 import com.medmikk.avitoweatherapp.domain.usecase.GetForecastUsecase
 
-class GetForecastUsecaseImpl(private val repository: ForecastRepository): GetForecastUsecase {
-    override suspend fun getForecastData(isCashDataRequired: Boolean): ForecastDomain {
+class GetForecastUsecaseImpl(private val repository: ForecastRepository) : GetForecastUsecase {
+    override suspend fun getForecastData(
+        isCashDataRequired: Boolean,
+        lat: Double,
+        lon: Double
+    ): ForecastDomain {
         return if (isCashDataRequired) {
-            repository.getCachedForecast()
+            repository.getCachedForecast(lat, lon)
         } else {
-            repository.getRemoteForecast()
+            repository.getRemoteForecast(lat, lon)
         }.also {
-            repository.saveToCach(it)
+            //repository.saveToCach(it)
         }
     }
 }

@@ -7,22 +7,22 @@ import com.medmikk.avitoweatherapp.domain.models.GeoDomain
 import com.medmikk.avitoweatherapp.domain.models.WeatherDomain
 
 object ModelsMapper {
-    fun mapRemoteForecastDTOToDomain(forecastResponseDTO: ForecastResponseDTO): ForecastDomain{
+    fun mapRemoteForecastDTOToDomain(forecastResponseDTO: ForecastResponseDTO): ForecastDomain {
         var list = ArrayList<WeatherDomain>()
         for (weather in forecastResponseDTO.list)
             list.add(
                 WeatherDomain(
-                temp = weather.main?.temp,
-                details = weather.weather[0].description,
-                ico = null, //TODO make icons
-                dateUnix = weather.dt
-            )
+                    temp = weather.main?.temp?.minus(273.5),
+                    details = weather.weather[0].description,
+                    ico = weather.weather[0].icon,
+                    dateUnix = weather.dt
+                )
             )
         return ForecastDomain(forecast = list)
     }
 
-    suspend fun mapRemoteGeoDTOToDomain(geoResponseDTO: GeoResponseDTO): GeoDomain{
-        return with(geoResponseDTO){
+    fun mapRemoteGeoDTOToDomain(geoResponseDTO: GeoResponseDTO): GeoDomain {
+        return with(geoResponseDTO) {
             GeoDomain(
                 lat = lat,
                 lon = lon,
